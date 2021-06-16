@@ -1,0 +1,31 @@
+plugins {
+    id "java"
+    id "org.springframework.boot" version "2.5.1"
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+    id "com.github.node-gradle.node" version "3.1.0" apply false
+}
+
+group = "com.mockcompany"
+version = "1.0.0"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-web"
+}
+
+project(":client-app") {
+    apply plugin: "com.github.node-gradle.node"
+    tasks.yarn_build.dependsOn tasks.yarn_install
+}
+
+task copyClientApp(type: Copy) {
+    dependsOn ":client-app:yarn_build"
+    from project(":client-app").buildDir
+    into "src/main/webapp"
+}
+
+tasks.assemble.dependsOn copyClientApp
+
