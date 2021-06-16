@@ -28,4 +28,4 @@ task copyClientApp(type: Copy) {
 }
 
 tasks.assemble.dependsOn copyClientApp
-
+tasks.bootRun.dependsOn copyClientApp
