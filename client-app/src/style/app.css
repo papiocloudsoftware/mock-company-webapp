@@ -1,0 +1,43 @@
+/* Default all margins/padding to 0 and center align */
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Ensure outer elements take up full space */
+  html, body, #root, #app {
+    height: 100%;
+    width: 100%;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 200;
+    line-height: 5vh;
+    font-size: 3vh;
+  }
+
+  .logo {
+    background-image: url(../images/fastShop.jpg);
+    width: 15vw;
+    height: 15vh;
+    border-radius: 50%;
+    margin: 2.5vh 0;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat; 
+  }
+
+  label {
+    padding: 0 0 0 2vw;
+  }
+
+  .mag {
+    background-image: url(../images/mag.png);
+    width: 5vh;
+    height: 5vw; 
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat; 
+  }
+
+  .search-input label {
+    color: darkgray;
+  }

@@ -7,3 +7,5 @@ build
 # This directory is generated from client-app/build 
 src/main/webapp
 
+.idea
+

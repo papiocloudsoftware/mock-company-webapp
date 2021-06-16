@@ -1,9 +1,13 @@
 plugins {
     id "java"
+    id "groovy"
     id "org.springframework.boot" version "2.5.1"
     id "io.spring.dependency-management" version "1.0.11.RELEASE"
     id "com.github.node-gradle.node" version "3.1.0" apply false
 }
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 group = "com.mockcompany"
 version = "1.0.0"
@@ -13,19 +17,29 @@ repositories {
 }
 
 dependencies {
+    // Versions are not required because we are using the org.springframework.boot plugin with the io.spring.dependency-management plugin
     implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    runtime "com.h2database:h2"
+
+    testImplementation "org.spockframework:spock-core:1.2-groovy-2.4"
+    testImplementation "org.spockframework:spock-spring:1.2-groovy-2.4"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
 }
 
+// Here we are going to make sure the client UI does a package install with yarn before building. This uses the gradle node plugin
 project(":client-app") {
     apply plugin: "com.github.node-gradle.node"
     tasks.yarn_build.dependsOn tasks.yarn_install
 }
 
+// Here we have a task that depends on the client UI build and then copies the build output into src/main/webapp so that Java app will serve it
 task copyClientApp(type: Copy) {
     dependsOn ":client-app:yarn_build"
     from project(":client-app").buildDir
     into "src/main/webapp"
 }
 
+// Ensure copying the client webapp happens before building the jar (assemble) or running the app (bootRun)
 tasks.assemble.dependsOn copyClientApp
-
+tasks.bootRun.dependsOn copyClientApp
