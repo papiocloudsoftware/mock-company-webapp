@@ -1,0 +1,29 @@
+/* Default all margins/padding to 0 and center align */
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Ensure outer elements take up full space */
+  html, body, #root, #app {
+    height: 100%;
+    width: 100%;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 200;
+    line-height: 5vh;
+    font-size: 3vh;
+  }
+
+  .logo {
+    background-image: url(../images/netflixlogo.jpeg);
+    width: 20vw;
+    height: 20vh;
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    margin: 2.5vh 0;
+  }
+
+  .search-input label {
+    color: darkgray;
+  }
