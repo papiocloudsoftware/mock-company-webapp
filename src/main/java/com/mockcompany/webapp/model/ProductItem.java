@@ -74,4 +74,15 @@ public class ProductItem {
     public int hashCode() {
         return Objects.hash(getName(), getDescription(), getCost(), getImage());
     }
+
+    @Override
+    public String toString() {
+        return "ProductItem{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", cost=" + cost +
+                ", image='" + image + '\'' +
+                '}';
+    }
 }
