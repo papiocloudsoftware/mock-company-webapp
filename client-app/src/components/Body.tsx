@@ -87,6 +87,8 @@ class Header extends React.Component<BodyProps, BodyState> {
     this.getMovies = this.getMovies.bind(this);
     this.search = this.search.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleKeypress = this.handleKeypress.bind(this);
+    this.clearSearchAndGetMovies = this.clearSearchAndGetMovies.bind(this);
     this.getMovies();
   }
 
@@ -114,10 +116,21 @@ class Header extends React.Component<BodyProps, BodyState> {
     const response = await fetch("/api/search", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: searchInput
+      body: JSON.stringify(searchInput)
     });
     const searchResult = await response.json();
-    this.setState({ movies: searchResult });
+    this.setState({ movies: searchResult.movieSearch });
+  }
+
+  handleKeypress(e: any) {
+    //it triggers by pressing the enter key
+    if (e.keyCode === 13) {
+      this.search();
+    }
+  };
+
+  clearSearchAndGetMovies() {
+    this.setState({ searchInput: "" }, () => this.getMovies());
   }
 
   render() {
@@ -132,8 +145,14 @@ class Header extends React.Component<BodyProps, BodyState> {
             name="searchInput"
             value={searchInput} 
             onChange={this.handleInputChange}
+            onKeyUp={this.handleKeypress}
           />
-          <Button variant="outlined" size="large" className={classes.searchButton} onClick={this.search}>
+          <Button 
+          variant="outlined" 
+          size="large" 
+          className={classes.searchButton} 
+          onClick={this.search}
+          >
             Search Movies
           </Button>
         </div>
@@ -165,7 +184,7 @@ class Header extends React.Component<BodyProps, BodyState> {
               <div 
                 className={classes.showAllBtn} 
                 onClick={this.getMovies} 
-                onKeyUp={this.getMovies}>
+                onKeyUp={this.clearSearchAndGetMovies}>
                   Show All Movies
               </div>
               <TablePagination
