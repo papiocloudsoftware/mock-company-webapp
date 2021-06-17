@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: mock-company-webapp
+
+  # In memory database that is populated dynamically from DataPopulator
+  datasource:
+    url: jdbc:h2:mem:productsdb
+    username: sa
+    password: password
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
