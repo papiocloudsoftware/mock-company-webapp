@@ -80,12 +80,12 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     const { searchInput } = this.state;
 
     const response = await fetch(`/api/products/search?query=${encodeURIComponent(searchInput)}`, {
-      method: 'POST',
+      method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     });
     const searchResult = await response.json();
-    sendProducts(searchResult.productsSearched);
-    this.setState({ products: searchResult.productsSearched });
+    sendProducts(searchResult);
+    this.setState({ products: searchResult });
   }
 
   handleKeypress(e: any) {

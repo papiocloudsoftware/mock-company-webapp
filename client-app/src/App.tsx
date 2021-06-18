@@ -43,8 +43,8 @@ class App extends React.Component<AppProps, AppState> {
   async loadProducts() {
     const response = await fetch("/api/products/list");
     const data = await response.json();
-    console.log(data.products);
-    this.setState({ products: data.products })
+    console.log(data);
+    this.setState({ products: data })
   }
 
   getProducts(products: Product[]) {

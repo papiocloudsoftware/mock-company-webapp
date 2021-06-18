@@ -5,8 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import makeServer from "./server";
 
-
-makeServer();
+if (process.env.NODE_ENV === "development") {
+  makeServer();
+}
 
 ReactDOM.render(
   <React.StrictMode>

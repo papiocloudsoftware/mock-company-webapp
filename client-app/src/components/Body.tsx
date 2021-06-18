@@ -22,7 +22,7 @@ const styles = () => {
 
     },
     table: {
-      width: 650,
+      width: "50vw",
       margin: "auto",
       marginTop: "5vh"
     },
@@ -37,6 +37,10 @@ const styles = () => {
     },
     pagination: {
       width: "50vw",
+      margin: "auto"
+    },
+    image: {
+      width: "200px"
     }
   });
 };
@@ -92,9 +96,10 @@ class Body extends React.Component<BodyProps, BodyState> {
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                         <TableRow>
+                            <TableCell>Name</TableCell>
+                            <TableCell>Image</TableCell>
+                            <TableCell>Description</TableCell>
                             <TableCell>Cost</TableCell>
-                            <TableCell align="right">Image</TableCell>
-                            <TableCell align="right">Description</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -103,9 +108,10 @@ class Body extends React.Component<BodyProps, BodyState> {
                         : products
                         ).map((product: any) => (
                             <TableRow key={product.id}>
-                              <TableCell component="th" scope="row">${product.cost}</TableCell>
-                              <TableCell align="right"><div className={`image${product.id}`}></div></TableCell>
-                              <TableCell align="right">{product.description}</TableCell>
+                              <TableCell>{product.name}</TableCell>
+                              <TableCell><img src={product.image} className={classes.image}></img></TableCell>
+                              <TableCell>{product.description}</TableCell>
+                              <TableCell component="th" scope="row">${product.cost / 100}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

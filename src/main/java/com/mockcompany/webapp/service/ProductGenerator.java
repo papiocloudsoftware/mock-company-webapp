@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,13 +46,13 @@ public class ProductGenerator {
             "This is the best product we sell!",
             "One of a kind item here, get it while it lasts!",
             "We have all the best of these that anyone would ever want!",
-            "Priced so sell, you can't find it cheaper anywhere else!",
+            "Priced to sell, you can't find it cheaper anywhere else!",
             "You've been asking and we have delivered. This is the one everyone has wanted!",
             "The perfect gift for your friend, family, or significant other!",
             "This is not a trick, we are in fact selling it at this amazing price!",
             "No one else is carrying these items, we have it ALL!",
             "Grandparents go crazy for it, the perfect gift!",
-            "It's all kids are talking about these days! A great gift for an upcoming birthday"
+            "It's what all kids are talking about these days! A great gift for an upcoming birthday"
     };
 
     private final Random random = new Random();
