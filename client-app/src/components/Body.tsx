@@ -97,7 +97,7 @@ class Body extends React.Component<BodyProps, BodyState> {
                     <TableHead>
                         <TableRow>
                             <TableCell>Name</TableCell>
-                            <TableCell>Image</TableCell>
+                            <TableCell align="center">Image</TableCell>
                             <TableCell>Description</TableCell>
                             <TableCell>Cost</TableCell>
                         </TableRow>
