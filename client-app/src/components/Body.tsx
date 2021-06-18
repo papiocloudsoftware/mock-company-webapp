@@ -1,4 +1,4 @@
-import { Button, createStyles, Theme, TextField, WithStyles, withStyles, WithTheme, withTheme } from "@material-ui/core";
+import { createStyles, WithStyles, withStyles, WithTheme, withTheme } from "@material-ui/core";
 import React from "react";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,19 +14,6 @@ const styles = () => {
   return createStyles({
     body: {
         position: "relative"
-    },
-    searchContainer: {
-        textAlign: "center",
-        display: "grid",
-        width: "35vw",
-        margin: "1rem auto"
-    },
-    searchInput: {
-        color: "black",
-        margin: "1rem"
-    },
-    searchButton: {
-
     },
     moviesContainer: {
 
@@ -54,48 +41,35 @@ const styles = () => {
   });
 };
 
-interface BodyProps extends WithStyles<typeof styles>, WithTheme {}
+interface Product {
+  readonly id: number;
+  readonly description: string;
+  readonly cost: string;
+  readonly image: File;
+}
 
-interface Movie {
-    readonly id: number;
-    readonly name: string;
-    readonly year: string;
+interface BodyProps extends WithStyles<typeof styles>, WithTheme {
+  products: Product[]
 }
 
 interface BodyState {
-  movies: Movie[];
   page: number;
   rowsPerPage: number;
-  searchInput: string;
 }
 
-class Header extends React.Component<BodyProps, BodyState> {
+class Body extends React.Component<BodyProps, BodyState> {
 
   constructor(props: BodyProps) {
     super(props);
     this.state = {
-      movies: [],
       page: 0,
       rowsPerPage: 3,
-      searchInput: ""
     };
   }
 
   async componentDidMount() {
     this.handleChangePage = this.handleChangePage.bind(this);
     this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
-    this.getMovies = this.getMovies.bind(this);
-    this.search = this.search.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleKeypress = this.handleKeypress.bind(this);
-    this.clearSearchAndGetMovies = this.clearSearchAndGetMovies.bind(this);
-    this.getMovies();
-  }
-
-  async getMovies() {
-    const response = await fetch(`/api/movies`);
-    const data = await response.json();
-    this.setState({ movies: data.movies, page: 0 })
   }
 
   handleChangePage(e: any, newPage: any) {
@@ -106,102 +80,51 @@ class Header extends React.Component<BodyProps, BodyState> {
     this.setState({ rowsPerPage: parseInt(e.target.value), page: 0 })
   };
 
-  handleInputChange(e: any) {
-    const { value } = e.target;
-    this.setState({ searchInput: value })
-  }
-
-  async search() {
-    const { searchInput } = this.state;
-    const response = await fetch("/api/search", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(searchInput)
-    });
-    const searchResult = await response.json();
-    this.setState({ movies: searchResult.movieSearch });
-  }
-
-  handleKeypress(e: any) {
-    //it triggers by pressing the enter key
-    if (e.keyCode === 13) {
-      this.search();
-    }
-  };
-
-  clearSearchAndGetMovies() {
-    this.setState({ searchInput: "" }, () => this.getMovies());
-  }
-
   render() {
     const classes = this.props.classes;
-    const { movies, page, rowsPerPage, searchInput } = this.state;
+    const { products } = this.props;
+    // products.forEach(async (p) => await import(`${p.image}`));
+    const { page, rowsPerPage } = this.state;
     return (
       <div className={classes.body}>
-        <div className={classes.searchContainer}>
-          <TextField 
-            label="enter movie title" 
-            className={`search-input ${classes.searchInput}`} 
-            name="searchInput"
-            value={searchInput} 
-            onChange={this.handleInputChange}
-            onKeyUp={this.handleKeypress}
-          />
-          <Button 
-          variant="outlined" 
-          size="large" 
-          className={classes.searchButton} 
-          onClick={this.search}
-          >
-            Search Movies
-          </Button>
-        </div>
         <Paper>
             <TableContainer>
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Id</TableCell>
-                            <TableCell align="right">Name</TableCell>
-                            <TableCell align="right">Year</TableCell>
+                            <TableCell>Cost</TableCell>
+                            <TableCell align="right">Image</TableCell>
+                            <TableCell align="right">Description</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                     {(rowsPerPage > 0
-                        ? movies.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                        : movies
-                        ).map((movie) => (
-                            <TableRow key={movie.id}>
-                                <TableCell component="th" scope="row">{movie.id}</TableCell>
-                                <TableCell align="right">{movie.name}</TableCell>
-                                <TableCell align="right">{movie.year}</TableCell>
+                        ? products.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                        : products
+                        ).map((product: any) => (
+                            <TableRow key={product.id}>
+                              <TableCell component="th" scope="row">${product.cost}</TableCell>
+                              <TableCell align="right"><div className={`image${product.id}`}></div></TableCell>
+                              <TableCell align="right">{product.description}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
-            <div className={classes.footer}>
-              <div 
-                className={classes.showAllBtn} 
-                onClick={this.getMovies} 
-                onKeyUp={this.clearSearchAndGetMovies}>
-                  Show All Movies
-              </div>
-              <TablePagination
-              className={classes.pagination}
-              rowsPerPageOptions={[3, 5, 10]}
-              component="div"
-              count={movies.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onChangePage={this.handleChangePage}
-              onChangeRowsPerPage={this.handleChangeRowsPerPage}
-              />
-            </div>
+            <TablePagination
+            className={classes.pagination}
+            rowsPerPageOptions={[3, 5, 10]}
+            component="div"
+            count={products.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={this.handleChangePage}
+            onChangeRowsPerPage={this.handleChangeRowsPerPage}
+            />
         </Paper>
       </div>
     );
   }
 }
 
-export default withTheme(withStyles(styles)(Header));
+export default withTheme(withStyles(styles)(Body));

@@ -14,14 +14,70 @@
     font-size: 3vh;
   }
 
-  .logo {
-    background-image: url(../images/netflixlogo.jpeg);
-    width: 20vw;
-    height: 20vh;
-    background-position: center;
+  .image1 {
+    background-image: url(../images/1.png);
+  }
+  .image2 {
+    background-image: url(../images/2.png);
+  }
+  .image3 {
+    background-image: url(../images/3.png);
+  }
+  .image4 {
+    background-image: url(../images/4.png);
+  }
+  .image5 {
+    background-image: url(../images/5.png);
+  }
+  .image6 {
+    background-image: url(../images/6.png);
+  }
+  .image7 {
+    background-image: url(../images/7.png);
+  }
+  .image8 {
+    background-image: url(../images/8.png);
+  }
+  .image9 {
+    background-image: url(../images/9.png);
+  }
+  .image10 {
+    background-image: url(../images/10.png);
+  }
+
+  .image1, .image2, .image3, .image4, .image5,
+  .image6, .image7, .image8, .image9, .image10 {
     background-size: 100%;
-    background-repeat: no-repeat;
+    background-position: center;
+    background-repeat: no-repeat; 
+    width: 10vw;
+    height: 10vw;
+    margin-right: 0;
+    margin-left: auto;
+  }
+
+  .logo {
+    background-image: url(../images/fastShop.jpg);
+    width: 15vw;
+    height: 15vh;
+    border-radius: 50%;
     margin: 2.5vh 0;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat; 
+  }
+
+  label {
+    padding: 0 0 0 2vw;
+  }
+
+  .mag {
+    background-image: url(../images/mag.png);
+    width: 5vh;
+    height: 5vw; 
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat; 
   }
 
   .search-input label {
