@@ -17,6 +17,8 @@ import java.util.regex.Pattern;
  * Management decided it is super important that we have lots of products that match the following terms.
  * So much so, that they would like a daily report of the number of products for each term along with the total
  * product count.
+ *
+ * TODO: Refactor this class by rewritting the runReport method to use the SearchService
  */
 @RestController
 public class ReportController {
@@ -26,6 +28,10 @@ public class ReportController {
      */
     private final EntityManager entityManager;
 
+    /**
+     * TODO: Declare the SearchService similar to EntityManager and add as a constructor argument
+     */
+
     @Autowired
     public ReportController(EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -34,6 +40,8 @@ public class ReportController {
 
     @GetMapping("/api/products/report")
     public SearchReportResponse runReport() {
+        /** TODO: This method needs to be rewritten to use the SearchService */
+
         Map<String, Integer> hits = new HashMap<>();
         SearchReportResponse response = new SearchReportResponse();
         response.setSearchTermHits(hits);

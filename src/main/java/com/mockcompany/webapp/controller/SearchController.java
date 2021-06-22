@@ -49,12 +49,22 @@ public class SearchController {
      */
     private final ProductItemRepository productItemRepository;
 
+    /**
+     * TODO: Declare the SearchService instead of the ProductItemRepository and update the constructor.
+     *   The SearchService will need to have the ProductItemRepository declared and injected instead.
+     */
+
     @Autowired
     public SearchController(ProductItemRepository productItemRepository) {
         this.productItemRepository = productItemRepository;
     }
 
     /**
+     * TODO: Refactor this class by creating a new class named SearchService in the
+     *   com.mockcompany.webapp.service package.  It should be annotated with @Service and contain a similar
+     *   method as the one here except it will not have any API specific annotations since it is a reusable
+     *   service and not an API Controller!
+     *
      * The search method, annotated with @GetMapping telling spring this method should be called
      * when an HTTP GET on the path /api/products/search is made.  A single query parameter is declared
      * using the @RequestParam annotation.  The value that is passed when performing a query will be
