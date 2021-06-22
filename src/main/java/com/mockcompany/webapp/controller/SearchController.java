@@ -64,30 +64,41 @@ public class SearchController {
      */
     @GetMapping("/api/products/search")
     public Collection<ProductItem> search(@RequestParam("query") String query) {
-        /*
-         * TODO: !!!! Implement this method !!!!
-         *  The easiest implementation will be to use the findAll as we are below. Then filter using Java
-         *  string methods such as contains(...), toLowerCase(...), equals(...), etc.
-         *
-         *  The requirements are defined in src/test/groovy/com/mockcompany/webapp/controller/SearchControllerSpec.groovy
-         *
-         *  Read through the tests to get an idea of how search should work.  When the tests are written before the code,
-         *  it is known as Test Driven Development (TDD) and is a common best practice. The Spock framework is a great
-         *  framework for TDD because the tests are written very descriptively using sentences.
-         *
-         *    https://spockframework.org/spock/docs/2.0/spock_primer.html
-         *
-         *  For an added challenge, update the ProductItemRepository to do the filtering at the database layer :)
-         */
-
         Iterable<ProductItem> allItems = this.productItemRepository.findAll();
         List<ProductItem> itemList = new ArrayList<>();
 
-        // This is a loop that the code inside will execute on each of the items from the database.
+        boolean exactMatch = false;
+        if (query.startsWith("\"") && query.endsWith("\"")) {
+            exactMatch = true;
+            // Extract the quotes
+            query = query.substring(1, query.length() - 1);
+        } else {
+            // Handle case-insensitivity by converting to lowercase first
+            query = query.toLowerCase();
+        }
+
+        // For each item... This is written for simplicity to be read/understood not necessarily maintain or extend
         for (ProductItem item : allItems) {
-            // TODO: Figure out if the item should be returned based on the query parameter!
-            boolean matchesSearch = true;
-            itemList.add(item);
+            boolean nameMatches;
+            boolean descMatches;
+            // Check if we are doing exact match or not
+            if (exactMatch) {
+                // Check if name is an exact match
+                nameMatches = query.equals(item.getName());
+                // Check if description is an exact match
+                descMatches = query.equals(item.getDescription());
+            } else {
+                // We are doing a contains ignoring case check, normalize everything to lowercase
+                // Check if name contains query
+                nameMatches = item.getName().toLowerCase().contains(query);
+                // Check if description contains query
+                descMatches = item.getDescription().toLowerCase().contains(query);
+            }
+
+            // If either one matches, add to our list
+            if (nameMatches || descMatches) {
+                itemList.add(item);
+            }
         }
         return itemList;
     }
