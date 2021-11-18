@@ -1,6 +1,6 @@
 import "./style/app.css";
 
-import { createStyles, CssBaseline, MuiThemeProvider, WithStyles, withStyles } from "@material-ui/core";
+import { createStyles, CssBaseline, WithStyles, withStyles } from "@material-ui/core";
 import React from "react";
 import Header from "./components/Header";
 import Body from "./components/Body";

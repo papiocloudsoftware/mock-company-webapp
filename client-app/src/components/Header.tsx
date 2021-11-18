@@ -1,4 +1,4 @@
-import { AppBar, Button, createStyles, TextField, Theme, Toolbar, WithStyles, withStyles, WithTheme, withTheme } from "@material-ui/core";
+import { AppBar, Button, createStyles, TextField, Toolbar, WithStyles, withStyles, WithTheme, withTheme } from "@material-ui/core";
 import React from "react";
 
 const styles = () => {

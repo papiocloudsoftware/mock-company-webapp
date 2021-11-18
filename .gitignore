@@ -8,4 +8,5 @@ build
 src/main/webapp
 
 .idea
+.DS_Store
 
