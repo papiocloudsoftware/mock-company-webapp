@@ -109,7 +109,7 @@ class Body extends React.Component<BodyProps, BodyState> {
                         ).map((product: any) => (
                             <TableRow key={product.id}>
                               <TableCell>{product.name}</TableCell>
-                              <TableCell><img src={product.image} className={classes.image}></img></TableCell>
+                              <TableCell><img src={product.image} alt={product.name} className={classes.image}></img></TableCell>
                               <TableCell>{product.description}</TableCell>
                               <TableCell component="th" scope="row">${product.cost / 100}</TableCell>
                             </TableRow>

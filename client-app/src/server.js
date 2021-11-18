@@ -24,7 +24,7 @@ const productList = [
   { id: 10, description: "Great Scott!", cost: 20.20, image: image10 }
 ]
 
-export default function () {
+export function makeServer() {
   createServer({
     routes() {
       this.get("/api/products/list", () => productList)
