@@ -20,7 +20,7 @@ dependencies {
     // Versions are not required because we are using the org.springframework.boot plugin with the io.spring.dependency-management plugin
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
-    runtime "com.h2database:h2"
+    runtimeOnly "com.h2database:h2"
 
     testImplementation "org.spockframework:spock-core:1.2-groovy-2.4"
     testImplementation "org.spockframework:spock-spring:1.2-groovy-2.4"
