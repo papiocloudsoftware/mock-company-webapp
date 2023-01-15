@@ -30,6 +30,7 @@ public class SearchService {
          */
         Iterable<ProductItem> allItems = this.productItemRepository.findAll();
         List<ProductItem> itemList = new ArrayList<>();
+        Collection<ProductItem> itemList1 = new ArrayList<>();
 
         /*
          * 1. Check for quotes in the query string. We should use a regex for this but for simplicity
@@ -69,6 +70,6 @@ public class SearchService {
             }
         }
         // Return results
-        return itemList;
+        return itemList1;
     }
 }
