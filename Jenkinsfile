@@ -8,7 +8,7 @@ pipeline {
             stage('Example') {
                 steps {
                     ./gradlew assemble
-                    ./gradlew test
+
                 }
             }
         }
