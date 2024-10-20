@@ -2,24 +2,19 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
-    steps:   
-
-      - uses: actions/checkout@master
-
+    steps:
+      - uses: actions/checkout@v3
       - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
-          java-version: 11   
-
-
+          java-version: 11
       - name: Build project
         run: ./gradlew assemble
-
       - name: Run tests
         run: ./gradlew test
