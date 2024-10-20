@@ -1,7 +1,7 @@
 name: CI/CD Pipeline
 on:
   push:
-    branches: [master]
+    branches: [sathwikiiit-patch-1]
 
 jobs:
   build-and-test:
