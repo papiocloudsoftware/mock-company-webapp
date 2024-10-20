@@ -1,1 +1,9 @@
-
+on: push
+name: Jenkins single-shot master
+jobs:
+  Jenkinsfile:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Jenkinsfile
+      uses: Jenkinsfile@master
