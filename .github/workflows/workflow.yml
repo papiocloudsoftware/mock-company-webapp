@@ -15,6 +15,6 @@ jobs:
           java-version: 8
           distribution: adopt
       - name: Run tests
-        run: ./gradlew build
+        run: ./gradlew assemble
       - name: Run tests
         run: ./gradlew test
