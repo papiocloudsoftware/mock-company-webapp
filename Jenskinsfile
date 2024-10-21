@@ -1,0 +1,23 @@
+pipeline {
+    agent any  // This tells Jenkins to use any available agent to run the pipeline
+
+    stages {
+        stage('Build') {
+            steps {
+                sh './gradlew assemble'  // Run the Gradle build task to assemble the project
+            }
+        }
+        stage('Test') {
+            steps {
+                sh './gradlew test'  // Run the Gradle test task to execute unit tests
+            }
+        }
+    }
+
+    post {
+        always {
+            junit '**/build/test-results/test/*.xml'  // Collect and publish test results in JUnit format
+            archiveArtifacts artifacts: '**/build/libs/*.jar', allowEmptyArchive: true  // Archive the build artifacts (e.g., JAR files)
+        }
+    }
+}
