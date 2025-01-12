@@ -1,6 +1,17 @@
 pipeline {
-  /*
-   * TODO: Implement pipeline stages/steps
-   *   See documentation: https://www.jenkins.io/doc/book/pipeline/syntax/#stages
-   */
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                // Runs the build step
+                bat 'gradlew.bat assemble'
+            }
+        }
+        stage('Test') {
+            steps {
+                // Runs the tests
+                bat 'gradlew.bat test'
+            }
+        }
+    }
 }
