@@ -1,0 +1,17 @@
+name: Run Jenkinsfile with Jenkinsfile Runner
+
+# Runs on pushes or pull requests on any branch.
+on: [push, pull_request]
+
+jobs:
+  run-jenkinsfile:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Pulls the repository code.
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Executes the Jenkins pipeline defined in Jenkinsfile.
+      - name: Run Jenkinsfile using Jenkinsfile Runner
+        uses: jenkinsci/jenkinsfile-runner-github-actions@v0.2
